@@ -39,7 +39,7 @@
   <div id="etat" role="status">Ouverture…</div>
 </div>
 <script>
-var CONF = {"v":"ancetres-365c30f1b177","sel":"gxHJlDTzW8GEmhWDOspLEg==","tours":600000,"parts":[{"f":"p0.bin","iv":"Kdadr3PWV5M4cyKI","n":5044766},{"f":"p1.bin","iv":"SvUm+iJEcOcKMXDm","n":5044766},{"f":"p2.bin","iv":"gopWHdCls6gXu7oE","n":5044766},{"f":"p3.bin","iv":"DFlVcedr17m3rb35","n":5044766},{"f":"p4.bin","iv":"nzmPU5w2lgCADZ34","n":5044766}]};
+var CONF = {"v":"ancetres-0d601065959d","sel":"jRbK8s+5AvYDidyWHxXsfQ==","tours":600000,"parts":[{"f":"p0.bin","iv":"sI1dVCwc7zSZq0ij","n":5048448},{"f":"p1.bin","iv":"pwyBopIC1u9HhujV","n":5048448},{"f":"p2.bin","iv":"v/FWx8kzp3yPn5Gh","n":5048448},{"f":"p3.bin","iv":"I4vXG+0gNkkKG5M8","n":5048448},{"f":"p4.bin","iv":"HTOh1pwmPFjptT29","n":5048446}]};
 var CLE_CODE = 'ancetres-code';
 var etat = document.getElementById('etat');
 var form = document.getElementById('f');
@@ -100,8 +100,10 @@ function ouvrir(code) {
       for (j = 0; j < morceaux.length; j++) total += morceaux[j].length;
       var tout = new Uint8Array(total);
       for (j = 0; j < morceaux.length; j++) { tout.set(morceaux[j], pos); pos += morceaux[j].length; }
-      var html = new TextDecoder('utf-8').decode(tout);
-      setTimeout(function () { document.open(); document.write(html); document.close(); }, 30);
+      var tenu = { html: new TextDecoder('utf-8').decode(tout) };
+      // la mémoire de l'iPad : les morceaux déchiffrés et leur assemblage sont lâchés avant d'écrire la page (25 Mo de moins)
+      tout = null; morceaux.length = 0;
+      setTimeout(function () { var h = tenu.html; tenu.html = null; document.open(); document.write(h); h = null; document.close(); }, 30);
     })
     .catch(function (e) {
       if (e && e.message === 'code') { ecrire(CLE_CODE, null); demander('Ce n’est pas le bon code. Réessaie.'); }

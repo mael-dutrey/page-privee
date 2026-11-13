@@ -1,5 +1,5 @@
-// garde la page pour l'ouvrir sans réseau ; version ancetres-365c30f1b177
-var V = "ancetres-365c30f1b177";
+// garde la page pour l'ouvrir sans réseau ; version ancetres-0d601065959d
+var V = "ancetres-0d601065959d";
 var COQUILLE = ["./","index.html","manifest.json","icone-180.png","icone-512.png"];
 var TOUS = ["./","index.html","manifest.json","icone-180.png","icone-512.png","p0.bin","p1.bin","p2.bin","p3.bin","p4.bin"];
 self.addEventListener('install', function (e) {
